@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>♥小丫头♥</title>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/canvas_bg.js?v=1.3" ></script>
+
+<style>
+    
+body,html{
+margin:0;padding:0;
+overflow:hidden
+}
+
+/*背景画布*/
+.bgCanvas{
+    position: absolute;
+    z-index: -1;
+    text-align: center;
+    height:100vh;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+/*按钮样式*/
+.svoiceIcon{
+    
+    position: fixed;
+    top: 40vh;
+    width: 100%;
+    cursor: pointer;
+    text-align:center;
+    font-size:50px;
+    font-weight:bold;
+    z-index:9990;
+    
+    
+  animation-name:colorswitchs;
+  animation-duration: 3s; /*动画时间*/
+  animation-fill-mode: both; /*播放后的状态*/
+  animation-iteration-count: infinite; /*动作循环的次数：infinite 无限循环*/
+}
+@keyframes colorswitchs {
+	0% {
+		color: #0087C9
+	}
+	20% {
+		color: #EF4A53
+	}
+	40% {
+		color: #804cfa
+	}
+	60% {
+		color: #FFB463
+	}
+ 
+	80% {
+		color: #33D5D4
+	}
+	100% {
+		color: #0087C9
+	}
+}
+
+
+
+.star{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 40vh;
+  display:none;/*inline*/
+  z-index:9991
+}
+
+
+/*心跳开始 */
+.heart{
+   width: 200px;
+   height: 200px;
+   background: #f00;
+   position: relative;
+   filter:drop-shadow(0px 0px 20px rgb(255,20,20));
+   transform: rotate(45deg); 
+   margin: 20px auto; 
+}
+.heart{
+  animation-name:heartbeat;
+  animation-duration: 1s; /*动画时间 延迟显示遮盖了 */
+  animation-fill-mode: both; /*播放后的状态*/
+  animation-iteration-count: infinite; /*动作循环的次数：infinite 无限循环*/
+  
+}
+.heart:before, .heart:after{
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #f00;
+    border-radius: 100px;
+}
+
+.heart:before{
+   left: -100px;  
+}
+.heart:after{
+   left: 0;
+   top: -100px;
+}
+
+@keyframes heartbeat{
+    /*斜角 缩放 透明度*/
+    0%{transform: rotate(45deg) scale(0.8,0.8); opacity: 1;}
+    25%{transform: rotate(45deg) scale(1,1); opacity: 0.8;}
+    100%{transform: rotate(45deg) scale(0.8,0.8); opacity: 1;}
+}
+
+
+/* 心跳结束 */
+
+</style>
+
+<script>
+    
+    //touchmove当手指在屏幕上滑动的时候连续地触发
+document.body.addEventListener('touchmove', function(e){
+        e.preventDefault();
+    }, { passive: false });  //passive 参数不能省略，用来兼容ios和android
+
+
+    function star(){
+        //使用淡入效果来显示一个隐藏的 元素
+        // 隐藏
+        $('.svoiceIcon').fadeOut();
+        //$('#c').fadeOut();
+        // 显示
+        $('.star').fadeIn();
+        
+        // 延迟后操作
+        setTimeout(function(){
+            $('.svoiceIcon').fadeIn();
+            //$('#c').fadeIn();
+            
+            $('.star').fadeOut();
+            
+        },3000)
+    }
+    
+</script>
+
+</head>
+<body>
+ 
+ <!--canvas 画布展示 -->
+<canvas id="c" class="bgCanvas"></canvas>
+
+<!--按钮 展示-->
+<div onclick=star()><h1 class="svoiceIcon">♥周文文♥</h1></div>
+
+<!--跳动心 展示-->
+<div class="star"><div class="heart animated"></div></div>
+
+
+
+</body>
+</html>
